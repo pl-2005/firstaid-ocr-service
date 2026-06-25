@@ -1,0 +1,9 @@
+.env
+.idea/
+.pytest_cache/
+.venv/
+__pycache__/
+*.py[cod]
+logs/
+model_cache/
+tmp/

@@ -1,0 +1,18 @@
+# OCR CPU environment — RapidOCR (ONNX Runtime).
+# Uses the same PP-OCR model weights as PaddleOCR but runs 2–5× faster
+# on CPU with lower memory.
+#
+# If you need PaddleOCR on CPU instead (e.g. for API compatibility),
+# set OCR_ENGINE=paddleocr in .env and install paddlepaddle + paddleocr
+# manually.
+#
+# Python 3.11 is required; Python 3.14 does not have matching wheels.
+--index-url https://pypi.org/simple
+--trusted-host pypi.org
+--trusted-host files.pythonhosted.org
+
+-r requirements-common.txt
+
+rapidocr-onnxruntime>=1.3.0
+opencv-python-headless
+Pillow

@@ -1,0 +1,39 @@
+# FIRST-AID OCR Service
+# 启动：docker compose up -d
+# 查看日志：docker compose logs -f
+# 停止：docker compose down
+
+services:
+  ocr:
+    build: .
+    image: firstaid-ocr-service:latest
+    container_name: firstaid-ocr
+    restart: unless-stopped
+
+    ports:
+      - "8898:8898"
+
+    volumes:
+      # 模型缓存持久化，避免重启后重新下载 ONNX 模型
+      - ocr-models:/home/ocruser/.cache/rapidocr
+
+    environment:
+      OCR_HOST: 0.0.0.0
+      OCR_PORT: 8898
+      OCR_AUTO_LOAD: "true"
+      OCR_LOG_LEVEL: info
+
+    # 资源限制（可选，根据实际调整）
+    # CPU 推理建议至少 2 核、1 GB 内存
+    deploy:
+      resources:
+        limits:
+          cpus: "4"
+          memory: 2g
+        reservations:
+          cpus: "2"
+          memory: 1g
+
+volumes:
+  ocr-models:
+    name: firstaid-ocr-models

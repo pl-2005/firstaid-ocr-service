@@ -35,6 +35,13 @@ curl http://127.0.0.1:8898/v1/ocr/health
 curl -X POST http://127.0.0.1:8898/v1/ocr/warmup
 ```
 
+```bash
+# Docker build and run
+docker build -t firstaid-ocr-service .
+docker run -d -p 8898:8898 --name ocr firstaid-ocr-service
+docker run -d -p 8898:8898 -v ocr-models:/home/ocruser/.cache/rapidocr --name ocr firstaid-ocr-service
+```
+
 ## Architecture
 
 ```

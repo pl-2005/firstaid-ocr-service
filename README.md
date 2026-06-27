@@ -81,4 +81,23 @@ ocr:
 python -m pytest tests
 ```
 
+## Docker 部署
+
+```bash
+# 构建镜像
+docker build -t firstaid-ocr-service .
+
+# 启动容器（首次会自动下载 ONNX 模型）
+docker run -d -p 8898:8898 --name ocr firstaid-ocr-service
+
+# 持久化模型缓存，避免重启后重新下载
+docker run -d -p 8898:8898 \
+  -v ocr-models:/home/ocruser/.cache/rapidocr \
+  --name ocr firstaid-ocr-service
+
+# 查看日志和健康状态
+docker logs -f ocr
+docker exec ocr python -c "import urllib.request; print(urllib.request.urlopen('http://127.0.0.1:8898/v1/ocr/health').read())"
+```
+
 部署细节见 [docs/部署运维说明.md](docs/部署运维说明.md)。

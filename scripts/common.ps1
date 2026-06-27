@@ -123,10 +123,6 @@ function Start-OcrService {
     $resolvedCachePath = Resolve-ProjectPath -ProjectRoot $projectRoot -PathValue $cachePath
     New-Item -ItemType Directory -Force -Path $resolvedCachePath | Out-Null
 
-    $env:OCR_DEVICE = $Device
-    $env:PADDLEOCR_HOME = $resolvedCachePath
-    $env:PADDLE_PDX_CACHE_HOME = $resolvedCachePath
-
     $uvicornArgs = @(
         "-m", "uvicorn", "app.main:app",
         "--host", $ocrHost,

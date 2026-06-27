@@ -95,6 +95,10 @@ docker run -d -p 8898:8898 -v ocr-models:/home/ocruser/.cache/rapidocr --name oc
 
 # 健康检查
 curl http://127.0.0.1:8898/v1/ocr/health
+
+# 使用 tests 目录下的测试图片验证 OCR 识别
+curl -X POST http://127.0.0.1:8898/v1/ocr/recognize \
+  -F "image=@tests/test1.jpg"
 ```
 
 部署细节见 [docs/部署运维说明.md](docs/部署运维说明.md)。

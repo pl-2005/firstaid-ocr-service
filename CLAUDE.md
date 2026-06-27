@@ -39,6 +39,9 @@ curl -X POST http://127.0.0.1:8898/v1/ocr/warmup
 # Docker compose
 docker compose up -d
 docker compose logs -f
+
+# 使用测试图片验证
+curl -X POST http://127.0.0.1:8898/v1/ocr/recognize -F "image=@tests/test1.jpg"
 ```
 
 ## Architecture
